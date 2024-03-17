@@ -1,5 +1,8 @@
 package src.p03.c01;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * SistemaLanzador
  * Clase con el main para realizar las llamadas de entradas y salidas al parque.
@@ -14,22 +17,34 @@ public class SistemaLanzador {
 
 		IParque parque = new Parque();
 		char letra_puerta = 'A';
-		// final int NUM_PUERTAS = 2;
-		int NumPuertas = 3;
+		final int NumPuertas = 4;
+
 		System.out.println("¡Parque abierto!");
 
-		for (int i = 0; i < NumPuertas; i++) { // numero de puertas definido por parámetro
-
+		Thread hilosEntrada[] = new Thread[NumPuertas];
+		Thread hilosSalida[] = new Thread[NumPuertas];
+		
+		for (int i = 0; i < NumPuertas; i++) {
 			String puerta = "" + ((char) (letra_puerta++));
 
 			// Creación de hilos de entrada
 			ActividadEntradaPuerta entradas = new ActividadEntradaPuerta(puerta, parque);
-			new Thread(entradas).start();
+			hilosEntrada[i] = new Thread(entradas);
+			hilosEntrada[i].start();
 
 			// Creación de hilos de salida
 			ActividadSalidaPuerta salidas = new ActividadSalidaPuerta(puerta, parque);
-			new Thread(salidas).start();
+			hilosSalida[i] = new Thread(salidas);
+			hilosSalida[i].start();
 		}
-
+		for (int i = 0; i < NumPuertas; i++) {
+			try {
+				hilosEntrada[i].join();
+				hilosSalida[i].join();
+			} catch (InterruptedException e) {
+				Logger.getGlobal().log(Level.SEVERE, "Excpeción durante el join de entrada");
+			}
+		}
+		System.out.println("¡Parque cerrado!");
 	}
 }
