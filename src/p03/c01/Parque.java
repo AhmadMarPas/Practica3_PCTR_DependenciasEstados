@@ -179,7 +179,7 @@ public class Parque implements IParque {
 	 */
 	private synchronized double obtenerTmedio() {
 		long tActual = System.currentTimeMillis();
-		return (tActual - tInicial) / 1.0;
+		return (tActual - tInicial) / 1000.0;
 	}
 
 }
