@@ -154,9 +154,9 @@ public class Parque implements IParque {
 		// Hay que comprobar que no se ha llegado al máximo de gente permitida en el parque
 		while (contadorPersonasTotales >= AFORO_PARQUE) {
 			try {
-				System.out.println("PRE-WAIT");
+				System.out.println("MAX-PRE-WAIT");
 				wait();
-				System.out.println("POST-WAIT");
+				System.out.println("MAX-POST-WAIT");
 			} catch (InterruptedException e) {
 				Logger.getGlobal().log(Level.SEVERE, "Excpeción durante la espera para entrar al parque");
 			}
@@ -169,7 +169,9 @@ public class Parque implements IParque {
 	protected void comprobarAntesDeSalir() {
 		while (contadorPersonasTotales <= MIN_PARQUE) {
 			try {
+				System.out.println("MIN-PRE-WAIT");
 				wait();
+				System.out.println("MIN-POST-WAIT");
 			} catch (InterruptedException e) {
 				Logger.getGlobal().log(Level.SEVERE, "Excpeción durante la espera para salir al parque");
 			}
