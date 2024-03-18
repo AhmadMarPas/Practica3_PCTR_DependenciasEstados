@@ -21,7 +21,7 @@ public class Parque implements IParque {
 
 	/** Máxima y Mínima capacidad de personas en el parque. */
 	private final int MIN_PARQUE = 0;
-	private final int AFORO_PARQUE = 20;
+	private final int AFORO_PARQUE = 50;
 	/** Contados de personas totales dentro del parque */
 	private int contadorPersonasTotales;
 	/** Map para los contadores parciales de cada puerta*/
@@ -118,7 +118,7 @@ public class Parque implements IParque {
 		for(String p: contadoresPersonasPuerta.keySet()){
 			System.out.println("----> Por puerta " + p + " " + contadoresPersonasPuerta.get(p));
 		}
-		System.out.println(" ");
+		System.out.println();
 	}
 	
 	/**
@@ -138,7 +138,7 @@ public class Parque implements IParque {
 	 * Método que comprueba que siempre se cumple el Invariante.
 	 * En este caso el invariante es
 	 * La suma total de personas en el parque es igual a la suma parcial de entradas por las puertas del parque.
-	 * El total de personas dentro del parque debe estar entre 0 y AFORO_PARQUE.
+	 * El total de personas dentro del parque debe estar entre MIN_PARQUE y AFORO_PARQUE.
 	 * */
 	protected void checkInvariante() {
 		assert sumarContadoresPuerta() == contadorPersonasTotales : "INV: La suma de contadores de las puertas debe ser igual al valor del contador del parte";
@@ -154,9 +154,7 @@ public class Parque implements IParque {
 		// Hay que comprobar que no se ha llegado al máximo de gente permitida en el parque
 		while (contadorPersonasTotales >= AFORO_PARQUE) {
 			try {
-				System.out.println("MAX-PRE-WAIT");
 				wait();
-				System.out.println("MAX-POST-WAIT");
 			} catch (InterruptedException e) {
 				Logger.getGlobal().log(Level.SEVERE, "Excpeción durante la espera para entrar al parque");
 			}
@@ -169,9 +167,7 @@ public class Parque implements IParque {
 	protected void comprobarAntesDeSalir() {
 		while (contadorPersonasTotales <= MIN_PARQUE) {
 			try {
-				System.out.println("MIN-PRE-WAIT");
 				wait();
-				System.out.println("MIN-POST-WAIT");
 			} catch (InterruptedException e) {
 				Logger.getGlobal().log(Level.SEVERE, "Excpeción durante la espera para salir al parque");
 			}

@@ -26,7 +26,7 @@ public class SistemaLanzador {
 		/**
 		 * Número de puertas que tiene el parque y determina el número de hilos que se lanzarán.
 		 */
-		final int NumPuertas = 2;
+		final int NumPuertas = 4;
 
 		System.out.println("¡Parque abierto!");
 
