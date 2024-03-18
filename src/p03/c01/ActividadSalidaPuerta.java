@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 /**
  * ActividadSalidaPuerta
- * Clase que gestiona la salida al parque por una de las puertas.
+ * Clase que simula y registra la salida del parque por una de las puertas.
  * 
  * @author Ahmad Mareie Pascual
  * @version 1.1

@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 /**
  * ActividadEntradaPuerta
- * Clase que gestiona la entrada al parque por una de las puertas.
+ * Clase que simula y registra la entrada al parque por una de las puertas.
  * 
  * @author Ahmad Mareie Pascual
  * @version 1.1

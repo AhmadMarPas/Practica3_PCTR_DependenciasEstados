@@ -15,9 +15,18 @@ import java.util.logging.Logger;
 public class SistemaLanzador {
 	public static void main(String[] args) {
 
+		/**
+		 * Simula el parque del caso de estudio
+		 */
 		IParque parque = new Parque();
+		/**
+		 * puerta por la que se entra/sale al/del parque
+		 */
 		char letra_puerta = 'A';
-		final int NumPuertas = 4;
+		/**
+		 * Número de puertas que tiene el parque y determina el número de hilos que se lanzarán.
+		 */
+		final int NumPuertas = 5;
 
 		System.out.println("¡Parque abierto!");
 
@@ -37,6 +46,7 @@ public class SistemaLanzador {
 			hilosSalida[i] = new Thread(salidas);
 			hilosSalida[i].start();
 		}
+		// Recorremos el bucle para realizar el join de los hilos
 		for (int i = 0; i < NumPuertas; i++) {
 			try {
 				hilosEntrada[i].join();

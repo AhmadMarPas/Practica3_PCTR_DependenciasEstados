@@ -22,7 +22,9 @@ public class Parque implements IParque {
 	/** Máxima y Mínima capacidad de personas en el parque. */
 	private final int MIN_PARQUE = 0;
 	private final int AFORO_PARQUE = 20;
+	/** Contados de personas totales dentro del parque */
 	private int contadorPersonasTotales;
+	/** Map para los contadores parciales de cada puerta*/
 	private Hashtable<String, Integer> contadoresPersonasPuerta;
 	/** Para calcular los tiempos medios de estancia. */
 	private double tInicial;
@@ -175,7 +177,7 @@ public class Parque implements IParque {
 	}
 	
 	/**
-	 * Métdo que calcula el tiempo medio de espera en el parque.
+	 * Método que calcula el tiempo medio de espera en el parque.
 	 */
 	private synchronized double obtenerTmedio() {
 		long tActual = System.currentTimeMillis();
