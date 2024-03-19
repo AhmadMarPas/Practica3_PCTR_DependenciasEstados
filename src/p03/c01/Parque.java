@@ -55,8 +55,7 @@ public class Parque implements IParque {
 		comprobarAntesDeEntrar();
 
 		//Cálculo de tiempos
-		long tActual = System.currentTimeMillis();
-		tMedio = (tMedio + (tActual - tInicial)) / 2.0;
+		tMedio = calcularTiempo();
 
 		// Aumentamos el contador total y el individual
 		contadorPersonasTotales++;
@@ -92,8 +91,7 @@ public class Parque implements IParque {
 		contadoresPersonasPuerta.put(puerta, contadoresPersonasPuerta.get(puerta) - 1);
 
 		//Cálculo de tiempos
-		long tActual = System.currentTimeMillis();
-		tMedio = (tMedio + (tActual - tInicial)) / 2.0;
+		tMedio = calcularTiempo();
 
 		// Imprimimos el estado del parque
 		imprimirInfo(puerta, "Salida");
@@ -180,6 +178,10 @@ public class Parque implements IParque {
 	private synchronized double obtenerTmedio() {
 		long tActual = System.currentTimeMillis();
 		return (tActual - tInicial) / 1000.0;
+	}
+	
+	private synchronized double calcularTiempo() {
+		return (tMedio + (System.currentTimeMillis() - tInicial)) / 2.0;
 	}
 
 }
